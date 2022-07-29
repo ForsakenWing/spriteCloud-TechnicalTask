@@ -1,0 +1,13 @@
+class TestStore:
+
+    def test_place_an_order_for_a_pet(self):
+        ...
+
+    def test_return_pet_inventories_by_status(self):
+        ...
+
+    def test_find_purchase_order_by_id(self):
+        ...
+
+    def test_delete_purchase_order_by_id(self):
+        ...
