@@ -1,0 +1,47 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: tests
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.10"
+    - name: Installing docker
+      run: |
+        sudo apt update && sudo apt upgrade -y
+        sudo apt install docker
+        sudo apt install apt-transport-https ca-certificates curl software-properties-common
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+        sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        sudo apt update
+        apt-cache policy docker-ce
+        sudo apt install docker-ce
+        sudo apt install docker-ce;
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r dependencies/requirements.txt
+    - name: Launching selenium-grid
+      run: |
+        docker run -d -p 4444:4444 selenium/standalone-chrome
+        sleep 15;
+    - name: Launching tests
+      run: |
+        python -m pytest src/tests/
