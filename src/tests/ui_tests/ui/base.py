@@ -1,4 +1,4 @@
-from .helper import ClassHelper
+from . import ClassHelper
 import time
 import pytest
 

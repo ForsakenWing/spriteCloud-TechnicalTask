@@ -1,16 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver import ChromeOptions
-from . import ClassHelper, Screenshot
+from . import ClassHelper
 import pytest
-
-Screenshot().create_dir_for_screenshots()
 
 
 @pytest.fixture(scope="module", autouse=True)
 def driver():
     global _driver
     options = ChromeOptions()
-    # options.headless = True
     options.add_argument('--ignore-ssl-errors=yes')
     options.add_argument('--ignore-certificate-errors')
     # _driver = webdriver.Remote(
@@ -23,14 +20,13 @@ def driver():
 
 
 @pytest.hookimpl(hookwrapper=True)
-def pytest_runtest_makereport(item):
+def pytest_runtest_makereport():
     outcome = yield
     rep = outcome.get_result()
     if rep.when == 'call':
         if rep.failed:
             dr = ClassHelper(_driver)
-            name = item.name
-            dr.save_screenshot(name)
+            dr.save_screenshot()
 
 
 @pytest.fixture(scope="module", autouse=True)
