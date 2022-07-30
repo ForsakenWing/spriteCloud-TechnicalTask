@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+ tests:
+  restart: on-failure
+  depends_on:
+   - selenium-grid
+  build:
+   context: .
+  volumes:
+    - ./result/:/src/result
+  network_mode:
+    host
+
+ selenium-grid:
+   image: selenium/standalone-chrome
+   restart: on-failure
+   ports:
+     - "4444:4444"

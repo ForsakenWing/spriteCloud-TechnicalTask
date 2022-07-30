@@ -4,7 +4,6 @@ WORKDIR /opt/
 
 COPY dependencies/requirements.txt /tmp/
 
-
 RUN apk update && \
     apk add build-base
 
