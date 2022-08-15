@@ -1,0 +1,15 @@
+---
+- hosts: virtualmachines
+  become: yes
+  tasks:
+  - name: Ensure that python3.9 is installed
+    ansible.builtin.apt:
+      name: python3.9
+      state: latest
+      update_cache: true
+  - name: Ensure that pip is installed
+    ansible.builtin.apt:
+      name: python3-pip
+      state: latest
+      update_cache: true
+...

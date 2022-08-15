@@ -1,0 +1,25 @@
+---
+- hosts: virtualmachines
+  become: yes
+  tasks:
+  - name: Remove useless packages from the cache
+    ansible.builtin.apt:
+      autoclean: yes
+  - name: Remove dependencies that are no longer required
+    ansible.builtin.apt:
+      autoremove: yes
+  - name: Run the equivalent of "apt-get clean" as a separate step
+    apt:
+      clean: yes
+  - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+    ansible.builtin.apt:
+      update_cache: yes
+      cache_valid_time: 3600
+  - name: Update all packages to their latest version
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+  - name: Upgrade the OS (apt-get full)
+    ansible.builtin.apt:
+      upgrade: full
+...

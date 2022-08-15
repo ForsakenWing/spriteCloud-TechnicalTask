@@ -35,5 +35,4 @@ def pytest_runtest_makereport(item):
 def quit_session(request, driver):
     def fin():
         driver.quit()
-
     request.addfinalizer(fin)

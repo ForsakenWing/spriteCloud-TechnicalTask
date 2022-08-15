@@ -66,7 +66,7 @@ class Browser(CommonBrowser):
     @save_screenshot
     def click_on_bad_button(self, request):
         self.dr.click_on_element('xpath=//button[@id="badButton"]')
-        time.sleep(1)
+        # time.sleep(1)
 
     @save_screenshot
     def click_on_blue_btn(self, request):

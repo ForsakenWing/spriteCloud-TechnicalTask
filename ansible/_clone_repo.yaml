@@ -1,0 +1,8 @@
+---
+- hosts: virtualmachines
+  tasks:
+    - name: Clone repository
+      ansible.builtin.git:
+        repo: https://github.com/ForsakenWing/spriteCloud-TechnicalTask.git
+        dest: "$HOME/{{ sprite_cloud_repo_folder_name }}/"
+        force: true

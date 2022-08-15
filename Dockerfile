@@ -5,7 +5,15 @@ WORKDIR /opt/
 COPY dependencies/requirements.txt /tmp/
 
 RUN apk update && \
-    apk add build-base
+    apk add build-base && \
+    apk add python3-dev && \
+    apk add gcc && \
+    apk add libffi-dev && \
+    apk add cargo && \
+    apk add musl-dev && \
+    apk add openssl-dev
+
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
 RUN python -m venv .venv && \
     .venv/bin/python -m pip install --upgrade pip && \

@@ -1,0 +1,12 @@
+---
+- hosts: virtualmachines
+  become: true
+  tasks:
+    - name: Running tests in docker-container
+      ansible.builtin.shell:
+        chdir: "/home/{{ ansible_user }}/{{ sprite_cloud_repo_folder_name }}"
+        cmd: |
+          docker rm -f $(docker ps -aq) 2> /dev/null && \
+          docker rmi $(docker images -q) 2> /dev/null && \
+          docker-compose build && \
+          docker-compose up

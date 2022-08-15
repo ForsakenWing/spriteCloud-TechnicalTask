@@ -1,0 +1,2 @@
+spartak_user_password: "{{ vault_spartak_user_password }}"
+sprite_cloud_repo_folder_name: "spriteCloud-repo"

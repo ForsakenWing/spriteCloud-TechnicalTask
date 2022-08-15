@@ -1,0 +1,16 @@
+- hosts: virtualmachines
+- name: Update system dependencies
+  ansible.builtin.import_playbook: _default_update.yaml
+- name: Installing python
+  ansible.builtin.import_playbook: _python_set_up.yaml
+- name: Installing git
+  ansible.builtin.import_playbook: _git_set_up.yaml
+- name: Clone repository
+  ansible.builtin.import_playbook: _clone_repo.yaml
+- name: Installing dependencies
+  ansible.builtin.import_playbook: _docker_set_up.yaml
+- name: Running project
+  ansible.builtin.import_playbook: _run_containers.yaml
+
+
+

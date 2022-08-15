@@ -1,0 +1,7 @@
+virtualmachines:
+  hosts:
+     vm01:
+       ansible_host: 192.168.68.124
+  vars:
+    ansible_user: spartak
+    ansible_become_password: "{{ spartak_user_password }}"
